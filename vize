@@ -1,0 +1,215 @@
+#include <stdio.h> /*c dilinde yerlesik olarak bulunmayan input output işlemlerini yapabilmek için gerekli olan standard başlık dosyasıdır.*/
+#include <stdlib.h>/* C standart kütüphanesinde bulunan bellek yönetimi, ortamla etkileşim, tamsayı aritmetiği, arama, sıralama, dönüştürme gibi işlevlerin bildirimlerini içinde bulunduran bir başlık dosyasıdı*/
+#include <stdbool.h>
+#include <math.h> /* matematiksel işlemler kütüphande*/
+#include <conio.h>
+
+
+void gorev_1() 
+{
+	printf("4 ile 20 Arasinda Bir Sayi Giriniz {(4,20] olacak sekilde}:\t");
+	int secim = sayi_al(); //oluşturduğumuz sayi_al fonksiyonunda ki değeri tutuyoruz aşağıda kontrolünü yaparak
+	if ((secim < 5) || (secim > 20)) 
+	{
+		printf("Gecersiz bir sayi girdiniz! \n\n");
+		gorev_1();
+	} 
+	else 
+	{
+		int i, carpi_i, yildiz_i, yildiz_max; 
+		for (i = 1; i <= secim+1; i++) 
+		{ // Girilen sayi kadar sonuç bir döngü oluştur örn: 5 girince sonuç *****
+			yildiz_max = secim;
+			for (carpi_i = 1; carpi_i<i; carpi_i++) 
+			{ // ana döngü  kadar X işareti yazdırılacak
+				printf("X");
+				yildiz_max--;
+			}
+			for (yildiz_i = 1; yildiz_i <= yildiz_max; yildiz_i++) 
+			{ // secim değerinden ekrana yazılan X adedini çıkartarak kalanı kadarıyla * yazılacak
+				printf("*");
+			}
+	
+			printf("\n");
+		}
+	}
+	
+	printf("Gosterim islemi Tamamlandi Menuye Yonlendiriliyorsunuz\n");
+	altcizgi();
+}
+
+
+
+void gorev_2() 
+{
+
+        int gun,ay,yil;
+
+        printf("\nGun ay yil giriniz: ");
+
+        scanf("%s", &gun);
+
+        if(yil>2020) 
+		{
+
+                printf("\nYanlis tarih.\n");
+
+        }
+
+        if(ay>12) 
+		{
+
+                printf("\nYanlis tarih.\n");
+
+        }
+
+        if(gun>31) 
+		{
+
+                printf("\nYanlis tarih.\n");
+
+        }
+        altcizgi();
+
+
+}
+
+int gorev_3()
+ {
+	 int sayi;
+	 printf("Bir sayi giriniz:");
+	 scanf("%d",&sayi);
+	 altilik(sayi);
+	 altcizgi();
+	
+
+ }
+
+
+int altilik(int x)
+ {
+	 int i,k[20];
+	 i=0;
+	 while(x>=1)
+	 {
+	 i++;
+	 k[i]=x%6;
+	 x=x/6;
+ }
+
+	printf("\nAltilik tabandaki sayi karsiligi:");
+	for(i=i;i>0;i--)
+	printf("%d",k[i]);
+	printf("\n\n");
+
+ 
+ }
+
+
+
+void gorev_4() 
+{
+
+    int sayi, gecici, sonuc=0, kalan;
+ 
+    printf("Sayi Giriniz: ");
+    scanf("%d", &sayi);
+    
+    gecici = sayi;
+    
+    while ( gecici > 0 ){
+        
+        kalan = gecici % 10;
+        sonuc = sonuc * 10 + kalan;
+        gecici /= 10;    
+    }
+    
+    printf ("%d'nin tersi= %d", sayi, sonuc);
+   printf("\n\n");
+   altcizgi();
+   
+    
+      
+
+}
+
+int sayi_al() 
+{
+	int secim;
+	scanf("%d", &secim);
+	return secim;
+}
+
+void cikis_yap() 
+{
+	printf("Cikis yapmak istediginize emin misiniz? e/h \n\n");
+	char cevap;
+	scanf("%s", &cevap);
+	if (cevap == 'e') 
+	{
+		printf("Cikis islemi Onaylandi, iyi Calismalar Dileriz");
+		exit(0);
+	}
+}
+
+void menu_klavye_kontrol() 
+{
+	int secim = sayi_al();
+	if ((secim < 1) || (secim > 5)) 
+	{
+		printf("Lutfen 1 ile 5 arasinda bir numara giriniz!\n");
+		menu_klavye_kontrol();
+	} 
+	else 	
+	{
+		
+		if (secim == 1) 
+		{
+			printf("Gosterim Menusune Hos Geldiniz\n");
+			gorev_1();
+			
+		} 
+		
+		else if (secim == 2) 
+		{
+			printf("Tarih Kontrolu Menusune Hos Geldiniz\n");
+			gorev_2();
+			
+		}
+		else if (secim == 3) 
+		{
+			printf("Taban Donusturme Menusune Hos Geldiniz\n");
+			gorev_3();
+			
+		}
+		else if (secim == 4) 
+		{
+			printf("Sayinin Tersini Bulma Menusune Hos Geldiniz\n");
+			gorev_4();
+		} 
+		
+		else if (secim == 5) 
+		{
+			cikis_yap();
+		}	
+		menu_goster();	
+	}
+}
+
+int menu_goster() 
+{
+	printf("Lutfen Kullanmak istediginiz Menu Arasinda Secim Yapiniz\n1 - Gosterim\n2 - Tarih Kontrolu\n3 - Taban Donusturme\n4 - Sayinin Tersi\n5 - Cikis\nSeciminiz : \n");
+	menu_klavye_kontrol();	
+}
+
+int altcizgi() 
+{
+	
+	printf("________________________________________________\n\n");
+}
+
+void main() 
+{ //int main olunca return 0 dö
+	printf("C Programlama Vize Odevine Hos Geldiniz\n\n");
+	menu_goster();
+}
